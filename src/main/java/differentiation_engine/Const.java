@@ -1,5 +1,7 @@
 package differentiation_engine;
 
+import java.util.HashMap;
+
 public class Const extends Expression {
     private double value;
 
@@ -15,7 +17,7 @@ public class Const extends Expression {
         return Double.toString(value);
     }
 
-    public double evaluate() {
+    public double evaluate(HashMap<Variable, Double> values) {
         return value;
     }
 }
