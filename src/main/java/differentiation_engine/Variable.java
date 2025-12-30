@@ -11,7 +11,7 @@ public class Variable extends Expression {
 
     public Expression differentiate(Variable var) {
         if (this.symbol == var.symbol) {
-            return this;
+            return new Const(1);
         } else {
             return new Const(0);
         }
