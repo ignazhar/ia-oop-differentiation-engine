@@ -11,7 +11,7 @@ public class Cos extends Expression {
 
     @Override
     public Expression differentiate(Variable var) {
-        return new Multiply(new Cos(argument), argument.differentiate(var));
+        return new Multiply(new Const(-1), new Multiply(new Sin(argument), argument.differentiate(var)));
     }
 
     @Override
