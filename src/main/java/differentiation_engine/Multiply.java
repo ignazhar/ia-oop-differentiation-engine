@@ -22,7 +22,11 @@ public class Multiply extends Expression {
 
     @Override
     public String toString() {
-        return "(" + lhs.toString() + ") * (" + rhs.toString() + ")";
+        String lhsString = lhs.toString();
+        if (!lhs.isAtomic()) lhsString = "(" + lhsString + ")";
+        String rhsString = rhs.toString();
+        if (!rhs.isAtomic()) rhsString = "(" + rhsString + ")";
+        return lhsString + "*" + rhsString;
     }
 
     @Override
@@ -40,5 +44,10 @@ public class Multiply extends Expression {
         } else {
             return this;
         }
+    }
+
+    @Override
+    public boolean isAtomic() {
+        return true;
     }
 }

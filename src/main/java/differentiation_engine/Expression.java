@@ -16,4 +16,8 @@ public abstract class Expression {
     public Expression Simplify() {
         return this;
     }
+
+    public boolean isAtomic() {
+        return true;
+    }
 }

@@ -34,4 +34,9 @@ public class Add extends Expression {
             return this;
         }
     }
+
+    @Override
+    public boolean isAtomic() {
+        return false;
+    }
 }
