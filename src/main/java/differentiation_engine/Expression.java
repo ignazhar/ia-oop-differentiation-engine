@@ -12,4 +12,8 @@ public abstract class Expression {
     public abstract double evaluate(HashMap<Variable, Double> values);
     
     public abstract String toString();
+
+    public Expression Simplify() {
+        return this;
+    }
 }

@@ -3,7 +3,7 @@ package differentiation_engine;
 import java.util.HashMap;
 
 public class Multiply extends Expression {
-    public final Expression lhs, rhs;
+    private Expression lhs, rhs;
 
     public Multiply(Expression lhs, Expression rhs) {
         this.lhs = lhs;
@@ -23,5 +23,22 @@ public class Multiply extends Expression {
     @Override
     public String toString() {
         return "(" + lhs.toString() + ") * (" + rhs.toString() + ")";
+    }
+
+    @Override
+    public Expression Simplify() {
+        lhs = lhs.Simplify();
+        rhs = rhs.Simplify();
+        if (lhs instanceof Const && ((Const)lhs).getValue() == 0.0) {
+            return new Const(0);
+        } else if (rhs instanceof Const && ((Const)rhs).getValue() == 0.0) {
+            return new Const(0);
+        } else if (lhs instanceof Const && ((Const)lhs).getValue() == 1.0) {
+            return rhs;
+        } else if (rhs instanceof Const && ((Const)rhs).getValue() == 1.0) {
+            return lhs;
+        } else {
+            return this;
+        }
     }
 }

@@ -3,7 +3,7 @@ package differentiation_engine;
 import java.util.HashMap;
 
 public class Sin extends Expression {
-    public final Expression argument;
+    private Expression argument;
 
     public Sin(Expression argument) {
         this.argument = argument;
@@ -22,5 +22,11 @@ public class Sin extends Expression {
     @Override
     public String toString() {
         return "sin(" + argument.toString() + ")";
+    }
+
+    @Override
+    public Expression Simplify() {
+        argument = argument.Simplify();
+        return this;
     }
 }

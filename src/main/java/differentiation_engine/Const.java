@@ -3,10 +3,14 @@ package differentiation_engine;
 import java.util.HashMap;
 
 public class Const extends Expression {
-    public final double value;
+    private double value;
 
     public Const(double value) {
         this.value = value;
+    }
+
+    public double getValue() {
+        return value;
     }
 
     public Expression differentiate(Variable var) {

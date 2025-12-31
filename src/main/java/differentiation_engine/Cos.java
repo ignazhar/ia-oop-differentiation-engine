@@ -3,7 +3,7 @@ package differentiation_engine;
 import java.util.HashMap;
 
 public class Cos extends Expression {
-    public final Expression argument;
+    private Expression argument;
 
     public Cos(Expression argument) {
         this.argument = argument;
@@ -22,5 +22,11 @@ public class Cos extends Expression {
     @Override
     public String toString() {
         return "cos(" + argument.toString() + ")";
+    }
+
+    @Override
+    public Expression Simplify() {
+        argument = argument.Simplify();
+        return this;
     }
 }
