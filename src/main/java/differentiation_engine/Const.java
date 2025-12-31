@@ -3,7 +3,7 @@ package differentiation_engine;
 import java.util.HashMap;
 
 public class Const extends Expression {
-    private double value;
+    public final double value;
 
     public Const(double value) {
         this.value = value;
