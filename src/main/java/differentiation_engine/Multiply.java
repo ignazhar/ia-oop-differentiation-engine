@@ -48,6 +48,6 @@ public class Multiply extends Expression {
 
     @Override
     public boolean isAtomic() {
-        return true;
+        return false;
     }
 }
