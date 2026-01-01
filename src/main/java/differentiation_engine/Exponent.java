@@ -11,6 +11,7 @@ public class Exponent extends Expression {
         this.power = power;
     }
 
+    @Override
     public Expression differentiate(Variable var) {
         // let f(x)=base, g(x)=power, find d/dx f(x)^g(x)
         // = f^g(g'ln(f) + g*f'/f)
@@ -20,10 +21,12 @@ public class Exponent extends Expression {
         return new Multiply(this, new Add(A, B));
     }
 
+    @Override
     public double evaluate(HashMap<Variable, Double> values) {
         return Math.pow(base.evaluate(values), power.evaluate(values));
     }
 
+    @Override
     public String toString() {
         String baseString = base.isAtomic() ? base.toString() : "(" + base.toString() + ")";
         String powerString = power.isAtomic() ? power.toString() : "(" + power.toString() + ")";

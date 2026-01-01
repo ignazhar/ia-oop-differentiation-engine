@@ -10,14 +10,17 @@ public class Add extends Expression {
         this.rhs = rhs;
     }
 
+    @Override
     public Expression differentiate(Variable var) {
         return new Add(lhs.differentiate(var), rhs.differentiate(var));
     }
 
+    @Override
     public double evaluate(HashMap<Variable, Double> values) {
         return lhs.evaluate(values) + rhs.evaluate(values);
     }
 
+    @Override
     public String toString() {
         return lhs.toString() + " + " + rhs.toString();
     }

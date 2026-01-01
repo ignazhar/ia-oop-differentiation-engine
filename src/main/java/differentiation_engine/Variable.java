@@ -9,6 +9,7 @@ public class Variable extends Expression {
         this.symbol = symbol;
     }
 
+    @Override
     public Expression differentiate(Variable var) {
         if (this.symbol == var.symbol) {
             return new Const(1);
@@ -17,6 +18,7 @@ public class Variable extends Expression {
         }
     }
 
+    @Override
     public double evaluate(HashMap<Variable, Double> values) throws IllegalArgumentException {
         if (values.containsKey(this)) {
             return values.get(this);
@@ -25,6 +27,7 @@ public class Variable extends Expression {
         }
     }
 
+    @Override
     public String toString() {
         return symbol;
     }
