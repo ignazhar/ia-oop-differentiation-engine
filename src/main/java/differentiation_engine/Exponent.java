@@ -1,6 +1,8 @@
 package differentiation_engine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 // General exponentiation class for f(x)^g(x)
 public class Exponent extends Expression {
@@ -17,7 +19,7 @@ public class Exponent extends Expression {
         // = f^g(g'ln(f) + g*f'/f)
         // let A = g'ln(f), B=g*f'/f
         Expression A = new Multiply(power.differentiate(var), new Logarithm(base));
-        Expression B = new Multiply(new Multiply(power, base.differentiate(var)), new Exponent(base, new Const(-1)));
+        Expression B = new MultiplyList(new ArrayList<>(List.of(power, base.differentiate(var), new Exponent(base, new Const(-1)))));
         return new Multiply(this, new Add(A, B));
     }
 
