@@ -15,6 +15,7 @@ Differentiation engine repo for IA OOP class
 * Easy bracket optimization using atomicity of expressions
 
 ## TODO:
+*** fix all TODO's!!!
 * Add specific exponentiation for c^f(x) and f(x)^c
 * Generalize addition and multiplication to arrays of expression
 * Build on simplification based on previous point
