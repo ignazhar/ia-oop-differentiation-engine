@@ -5,8 +5,8 @@ Differentiation engine repo for IA OOP class
 ### Expressions
 * Constant value
 * Variable
-* Addition of 2 expressions
-* Multiplication of 2 expressions
+* Addition of 2 or more(list of) expressions
+* Multiplication of 2 or more(list of) expressions
 * Sin, Cos, Tan functions
 * General exponentiation f(x)^g(x)
 * Natural Logarithm
@@ -17,7 +17,6 @@ Differentiation engine repo for IA OOP class
 ## TODO:
 *** fix all TODO's!!!
 * Add specific exponentiation for c^f(x) and f(x)^c
-* Generalize addition and multiplication to arrays of expression
 * Build on simplification based on previous point
 * Add command-line communication possibility(life-cycle parsing)
 * Add proper testing list of examples
