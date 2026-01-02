@@ -54,7 +54,7 @@ public class MultiplyList extends Expression {
         list = list.stream().map(expr -> expr.Simplify()).collect(Collectors.toCollection(ArrayList::new));
         
         // if there are nested multiplications - unnest them
-        ArrayList<Expression> updatedList = new ArrayList();
+        ArrayList<Expression> updatedList = new ArrayList<Expression>();
         for (Expression expr : list) {
             if (expr instanceof Multiply m) {
                 updatedList.add(m.getLhs());
