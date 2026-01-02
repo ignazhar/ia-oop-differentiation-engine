@@ -26,7 +26,7 @@ public class AddList extends Expression {
 
     @Override
     public String toString() {
-        return list.stream().map(expr -> expr.toString()).collect(Collectors.joining(" + "));
+        return list.stream().map(expr -> expr.toString()).collect(Collectors.joining("  +  "));
     }
 
     @Override

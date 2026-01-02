@@ -1,6 +1,8 @@
 package differentiation_engine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Multiply extends Expression {
     private Expression lhs, rhs;
@@ -10,6 +12,14 @@ public class Multiply extends Expression {
         this.rhs = rhs;
     }
 
+    public Expression getLhs() {
+        return lhs;
+    }
+
+    public Expression getRhs() {
+        return rhs;
+    }
+    
     @Override
     public Expression differentiate(Variable var) {
         return new Add(new Multiply(lhs, rhs.differentiate(var)), new Multiply(lhs.differentiate(var), rhs));
@@ -42,7 +52,8 @@ public class Multiply extends Expression {
         } else if (rhs instanceof Const && ((Const)rhs).getValue() == 1.0) {
             return lhs;
         } else {
-            return this;
+            // TODO: awkward way to do it -- rething & edit
+            return new MultiplyList(new ArrayList<>(List.of(lhs, rhs))).Simplify();
         }
     }
 

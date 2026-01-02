@@ -14,6 +14,13 @@ public class MultiplyList extends Expression {
         this.list = list;
     }
 
+    public ArrayList<Expression> getList() {
+        // TODO: bad code!!!
+        // I give access to the expressions themselves
+        // revisit!!!
+        return list;
+    }
+
     @Override
     public Expression differentiate(Variable var) {
         // O(n) -> O(n^2)
@@ -43,12 +50,29 @@ public class MultiplyList extends Expression {
 
     @Override
     public Expression Simplify() {
+        // simplify all children
         list = list.stream().map(expr -> expr.Simplify()).collect(Collectors.toCollection(ArrayList::new));
+        
+        // if there are nested multiplications - unnest them
+        ArrayList<Expression> updatedList = new ArrayList();
+        for (Expression expr : list) {
+            if (expr instanceof Multiply m) {
+                updatedList.add(m.getLhs());
+                updatedList.add(m.getRhs());
+            } else if (expr instanceof MultiplyList m) {
+                updatedList.addAll(m.getList());
+            } else {
+                updatedList.add(expr);
+            }
+        }
+        // TODO: using streams?
+        list = updatedList;
+
         // sum all const values to one
         double constProduct = list.stream().filter(expr -> expr instanceof Const).mapToDouble(c -> ((Const)c).getValue()).reduce(1, (a, b) -> a * b);
         list = list.stream().filter(expr -> !(expr instanceof Const)).collect(Collectors.toCollection(ArrayList::new));
         if (constProduct == 0.0) return new Const(0);
-        else if (constProduct != 1.0) list.add(new Const(constProduct));
+        else if (constProduct != 1.0) list.add(0, new Const(constProduct));
         return this;
     }
 
