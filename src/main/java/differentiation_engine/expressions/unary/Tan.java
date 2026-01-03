@@ -1,6 +1,10 @@
-package differentiation_engine;
+package differentiation_engine.expressions.unary;
 
 import java.util.HashMap;
+
+import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.binary.Exponent;
+import differentiation_engine.expressions.binary.Multiply;
 
 public class Tan extends Expression {
     private Expression argument;

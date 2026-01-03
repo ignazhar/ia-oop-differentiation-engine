@@ -1,6 +1,8 @@
-package differentiation_engine;
+package differentiation_engine.expressions.binary;
 
 import java.util.HashMap;
+
+import differentiation_engine.expressions.*;
 
 public class Add extends Expression {
     private Expression lhs, rhs;

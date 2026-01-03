@@ -1,8 +1,11 @@
-package differentiation_engine;
+package differentiation_engine.expressions.unary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.n_ary.MultiplyList;
 
 public class Cos extends Expression {
     private Expression argument;

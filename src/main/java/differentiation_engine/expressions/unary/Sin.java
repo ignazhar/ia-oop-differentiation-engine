@@ -1,6 +1,9 @@
-package differentiation_engine;
+package differentiation_engine.expressions.unary;
 
 import java.util.HashMap;
+
+import differentiation_engine.expressions.binary.Multiply;
+import differentiation_engine.expressions.*;
 
 public class Sin extends Expression {
     private Expression argument;

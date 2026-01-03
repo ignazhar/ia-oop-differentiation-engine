@@ -1,8 +1,10 @@
-package differentiation_engine;
+package differentiation_engine.expressions.n_ary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+
+import differentiation_engine.expressions.*;
 
 public class AddList extends Expression {
     private ArrayList<Expression> list;
@@ -37,6 +39,7 @@ public class AddList extends Expression {
         list = list.stream().filter(expr -> !(expr instanceof Const)).collect(Collectors.toCollection(ArrayList::new));
         if (constSum != 0.0) list.add(new Const(constSum));
         return this;
+        // TODO: improve nesting of simplify(like MultiplyList)
     }
 
     @Override

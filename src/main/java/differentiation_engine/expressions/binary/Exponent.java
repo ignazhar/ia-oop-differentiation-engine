@@ -1,8 +1,12 @@
-package differentiation_engine;
+package differentiation_engine.expressions.binary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.unary.Logarithm;
+import differentiation_engine.expressions.n_ary.MultiplyList;
 
 // General exponentiation class for f(x)^g(x)
 public class Exponent extends Expression {

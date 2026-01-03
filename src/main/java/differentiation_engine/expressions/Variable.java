@@ -1,4 +1,4 @@
-package differentiation_engine;
+package differentiation_engine.expressions;
 
 import java.util.HashMap;
 

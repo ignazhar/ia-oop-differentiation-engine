@@ -1,8 +1,11 @@
-package differentiation_engine;
+package differentiation_engine.expressions.n_ary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+
+import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.binary.Multiply;
 
 public class MultiplyList extends Expression {
     private ArrayList<Expression> list;
