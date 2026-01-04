@@ -11,7 +11,7 @@ public class Variable extends Expression {
 
     @Override
     public Expression differentiate(Variable var) {
-        if (this.symbol == var.symbol) {
+        if (this.symbol.equals(var.symbol)) {
             return new Const(1);
         } else {
             return new Const(0);
