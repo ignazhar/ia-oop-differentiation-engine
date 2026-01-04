@@ -1,4 +1,4 @@
-package differentiation_engine.expressions.parser;
+package differentiation_engine.parser;
 
 // TODO: dig into this further. This was a hint from ChatGPT to use this 
 // instead of a direct full class for Enumeration of values

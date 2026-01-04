@@ -1,4 +1,4 @@
-package differentiation_engine.expressions.parser;
+package differentiation_engine.parser;
 
 import java.util.ArrayList;
 import java.util.Collections;

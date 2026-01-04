@@ -1,4 +1,4 @@
-package differentiation_engine.expressions.parser;
+package differentiation_engine.parser;
 
 final class SignItem implements Item {
     private char sign;

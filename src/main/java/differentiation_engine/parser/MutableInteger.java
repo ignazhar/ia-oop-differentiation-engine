@@ -1,4 +1,4 @@
-package differentiation_engine.expressions.parser;
+package differentiation_engine.parser;
 
 public class MutableInteger {
     private int value;
