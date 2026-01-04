@@ -28,7 +28,7 @@ public class AddList extends Expression {
 
     @Override
     public String toString() {
-        return list.stream().map(expr -> expr.toString()).collect(Collectors.joining("  +  "));
+        return list.stream().map(expr -> expr.toString()).collect(Collectors.joining(" + "));
     }
 
     @Override
@@ -37,8 +37,10 @@ public class AddList extends Expression {
         // sum all const values to one
         double constSum = list.stream().filter(expr -> expr instanceof Const).mapToDouble(c -> ((Const)c).getValue()).sum();
         list = list.stream().filter(expr -> !(expr instanceof Const)).collect(Collectors.toCollection(ArrayList::new));
-        if (constSum != 0.0) list.add(new Const(constSum));
-        return this;
+        if (constSum != 0.0 || list.isEmpty()) list.add(new Const(constSum));
+        
+        if (list.size() == 1) return list.get(0);
+        else return this;
         // TODO: improve nesting of simplify(like MultiplyList)
     }
 
