@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.binary.Add;
 import differentiation_engine.expressions.binary.Multiply;
 
 public class MultiplyList extends Expression {
@@ -48,7 +49,11 @@ public class MultiplyList extends Expression {
 
     @Override
     public String toString() {
-        return list.stream().map(expr -> expr.toString()).collect(Collectors.joining(" * "));
+        return list.stream().map(expr -> 
+            (expr instanceof Add || expr instanceof AddList) 
+            ? "(" + expr.toString() + ")" 
+            : expr.toString())
+            .collect(Collectors.joining(" * "));
     }
 
     @Override
@@ -71,11 +76,13 @@ public class MultiplyList extends Expression {
         // TODO: using streams?
         list = updatedList;
 
-        // sum all const values to one
+        // multiply all const values to one
         double constProduct = list.stream().filter(expr -> expr instanceof Const).mapToDouble(c -> ((Const)c).getValue()).reduce(1, (a, b) -> a * b);
         list = list.stream().filter(expr -> !(expr instanceof Const)).collect(Collectors.toCollection(ArrayList::new));
         if (constProduct == 0.0) return new Const(0);
         else if (constProduct != 1.0) list.add(0, new Const(constProduct));
+        
+        if (list.size() == 1) return list.get(0);
         return this;
     }
 
