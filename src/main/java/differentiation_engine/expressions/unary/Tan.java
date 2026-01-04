@@ -15,7 +15,7 @@ public class Tan extends Expression {
 
     @Override
     public Expression differentiate(Variable var) {
-        return new Multiply(new Exponent(new Cos(var), new Const(-2)), argument.differentiate(var));
+        return new Multiply(new Exponent(new Cos(argument), new Const(-2)), argument.differentiate(var));
     }
 
     @Override
