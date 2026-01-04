@@ -1,0 +1,67 @@
+package differentiation_engine.expressions.binary;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.n_ary.MultiplyList;
+
+public class Multiply extends Expression {
+    private Expression lhs, rhs;
+
+    public Multiply(Expression lhs, Expression rhs) {
+        this.lhs = lhs;
+        this.rhs = rhs;
+    }
+
+    public Expression getLhs() {
+        return lhs;
+    }
+
+    public Expression getRhs() {
+        return rhs;
+    }
+    
+    @Override
+    public Expression differentiate(Variable var) {
+        return new Add(new Multiply(lhs, rhs.differentiate(var)), new Multiply(lhs.differentiate(var), rhs));
+    }
+
+    @Override
+    public double evaluate(HashMap<Variable, Double> values) {
+        return lhs.evaluate(values) * rhs.evaluate(values);
+    }
+
+    @Override
+    public String toString() {
+        String lhsString = lhs.toString();
+        if (!lhs.isAtomic()) lhsString = "(" + lhsString + ")";
+        String rhsString = rhs.toString();
+        if (!rhs.isAtomic()) rhsString = "(" + rhsString + ")";
+        return lhsString + "*" + rhsString;
+    }
+
+    @Override
+    public Expression Simplify() {
+        lhs = lhs.Simplify();
+        rhs = rhs.Simplify();
+        if (lhs instanceof Const && ((Const)lhs).getValue() == 0.0) {
+            return new Const(0);
+        } else if (rhs instanceof Const && ((Const)rhs).getValue() == 0.0) {
+            return new Const(0);
+        } else if (lhs instanceof Const && ((Const)lhs).getValue() == 1.0) {
+            return rhs;
+        } else if (rhs instanceof Const && ((Const)rhs).getValue() == 1.0) {
+            return lhs;
+        } else {
+            // TODO: awkward way to do it -- rething & edit
+            return new MultiplyList(new ArrayList<>(List.of(lhs, rhs))).Simplify();
+        }
+    }
+
+    @Override
+    public boolean isAtomic() {
+        return false;
+    }
+}
