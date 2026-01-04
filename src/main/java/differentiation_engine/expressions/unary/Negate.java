@@ -1,8 +1,11 @@
 package differentiation_engine.expressions.unary;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import differentiation_engine.expressions.*;
+import differentiation_engine.expressions.n_ary.MultiplyList;
 
 public class Negate extends Expression {
     private Expression argument;
@@ -28,8 +31,7 @@ public class Negate extends Expression {
 
     @Override
     public Expression Simplify() {
-        // TODO: Simplify using multiplication
         argument = argument.Simplify();
-        return this;
+        return new MultiplyList(new ArrayList<>(List.of(new Const(-1), argument))).Simplify();
     }
 }
