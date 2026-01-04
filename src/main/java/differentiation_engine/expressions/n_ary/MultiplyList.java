@@ -80,7 +80,7 @@ public class MultiplyList extends Expression {
         double constProduct = list.stream().filter(expr -> expr instanceof Const).mapToDouble(c -> ((Const)c).getValue()).reduce(1, (a, b) -> a * b);
         list = list.stream().filter(expr -> !(expr instanceof Const)).collect(Collectors.toCollection(ArrayList::new));
         if (constProduct == 0.0) return new Const(0);
-        else if (constProduct != 1.0) list.add(0, new Const(constProduct));
+        else if (constProduct != 1.0 || list.isEmpty()) list.add(0, new Const(constProduct));
         
         if (list.size() == 1) return list.get(0);
         return this;
