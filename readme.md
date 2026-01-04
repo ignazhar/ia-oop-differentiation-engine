@@ -42,3 +42,34 @@ x
 5.0 * ln(10.0 * y) * 2.0^(-5.0 * x * ln(10.0 * y)) + -25.0 * x * ln(10.0 * y) * 2.0^(-5.0 * x * ln(10.0 * y)) * ln(10.0 * y) * ln(2.0)
 [INFO] -------------------------<Maven build info>------------------------------
 ```
+
+## Overview of the project structure
+
+`main/java/differentiation_engine/`
+
+* `expressions/`
+    * `Expression.java` --- general abstract class for a mathematical expression
+    * `Const.java` --- atomic constant
+    * `Variable.java` --- atomic variable
+    * `unary/`
+        * `Negate.java` --- -expr
+        * `Sin.java` --- sin(arg)
+        * `Cos.java` --- cos(arg)
+        * `Tan.java` --- tan(arg)
+        * `Logarithm.java` --- ln(arg)
+    * `binary/`
+        * `Add.java` -- lhs + rhs
+        * `Multiply.java` -- lhs * rhs
+        * `Exponent.java` -- base ^ power
+    * `n_ary/`
+        * `AddList.java` --- a1 + a2 + ... + an
+        * `MultiplyList.java` --- a1 * a2 * ... * an
+* `parser/`
+    * `Parser.java` --- main logic of a parsing user's input string into a composite expression. Consult the code for more information on implementation
+    * `MutableInteger.java` --- mutable integer reference helper class for parser
+    * `Item.java` --- item sealed interface, that simulates an enumerator of sign and expression classes
+    * `SignItem.java` --- sign class that implements item
+    * `ExpressionItem.java` --- expression class that implements item
+* `App.java` --- main program execution logic
+
+`test/java/differentiation_engine/AppTest.java` - sample tests to run (TODO, improve)
