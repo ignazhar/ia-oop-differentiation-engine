@@ -19,22 +19,22 @@ import differentiation_engine.expressions.unary.Tan;
 
 public class Parser {
     // Get monomial expression of the form (1234xyz) from given index in input
-    private Expression getMonomial(String input, MutableInteger index, double constant) {
+    private Expression getMonomial(String input, MutableInteger index, Double constant) {
         int currentIndex = index.getValue();
         if (currentIndex >= input.length()) {
             // end of the monomial(and expression)
-            return new Const(constant == 0.0 ? 1.0 : constant);
+            return new Const(constant == null ? 1.0 : constant);
         }
         char c = input.charAt(currentIndex);
         if (Character.isDigit(c)) {
             // we have base-10 system, so we have value -> value*10 + c
-            return getMonomial(input, index.inc(), constant * 10 + Character.getNumericValue(c));
+            return getMonomial(input, index.inc(), (constant == null ? 0.0 : constant) * 10 + Character.getNumericValue(c));
         } else if (Character.isAlphabetic(c)) {
             // multiply by a variable (assume all variables have names length one)
             return new MultiplyList(new ArrayList<>(List.of(new Variable(Character.toString(c)), getMonomial(input, index.inc(), constant))));
         } else {
             // encountered a sign or a bracket - end of the monomial
-            return new Const(constant == 0.0 ? 1.0 : constant);
+            return new Const(constant == null ? 1.0 : constant);
         }
     }
 
@@ -84,7 +84,7 @@ public class Parser {
                 list.add(new ExpressionItem(new Logarithm(argument)));
             } else {
                 // monomial
-                Expression monomial = getMonomial(input, currentIndex, 0.0).Simplify();
+                Expression monomial = getMonomial(input, currentIndex, null).Simplify();
                 list.add(new ExpressionItem(monomial));
             }
 
